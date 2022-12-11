@@ -10,7 +10,7 @@ var savedView = document.querySelector('.saved-view')
 
 
 var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+//  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
 
 //Button Variables
@@ -41,7 +41,8 @@ makeUserCoverButton.addEventListener("click", makeUserCover)
 saveCoverButton.addEventListener("click", saveCovers)
 
 viewSavedButton.addEventListener("click", viewSavedArray)
-viewSavedCovers.addEventListener("click", viewSavedCovers)
+//viewSavedButton.addEventListener("clcik", viewSavedCovers)
+
 
 //one that 1) makes new user generated cover on click and 2) returns the cover on the home page and 3) takes the user there.
 //  Create your event handlers and other functions here
@@ -64,26 +65,28 @@ function makeUserCover(event) {
   goHome()
 }
 
-  function saveCovers() {
-  savedCovers.push(currentCover)
-  return savedCovers
+function saveCovers() {
+  if (!savedCovers.includes(currentCover)) {
+    savedCovers.push(currentCover)
+  } return savedCovers
   }
 
-//   function viewSavedArray() {
-// for (var i = 0; i < savedCovers.length; i++) {
-
-//  viewVarSavedCovers.innerHTML +=
-// `<section class="saved-covers-section"></section>
-// <section class="mini-cover">
-//     <img class="cover-image" src=${savedCovers[i].cover}>
-//     <h2 class="cover-title">${savedCovers[i].title}</h2>
-//     <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
-//     <img class="price-tag" src="./assets/price.png">
-//     <img class="overlay" src="./assets/overlay.png">`
-//   } 
-    
-
-//   }
+function viewSavedArray() {
+  viewSavedCovers()
+  var smallCover = ''
+  viewVarSavedCovers.innerHTML = ''
+    for (var i = 0; i < savedCovers.length; i++) {
+    smallCover = `<section class="saved-covers-section"></section>
+    <section class="mini-cover">
+     <img class="cover-image" src=${savedCovers[i].cover}>
+      <h2 class="cover-title">${savedCovers[i].title}</h2>
+     <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+     <img class="price-tag" src="./assets/price.png">
+     <img class="overlay" src="./assets/overlay.png">`
+  
+    viewVarSavedCovers.innerHTML += smallCover
+    }
+  }
 
 
   function generateRandom() {
