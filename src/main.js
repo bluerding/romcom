@@ -27,16 +27,21 @@ var userTitle = document.querySelector(".user-title")
 var userDescript1 = document.querySelector(".user-desc1")
 var userDescript2 = document.querySelector(".user-desc2")
 
+var viewVarSavedCovers = document.querySelector(".saved-covers-section")
 
 // Add your event listeners here 👇
 
 randomCoverButton.addEventListener("click", generateRandom)
 window.addEventListener("load", generateRandom)
 makeCoverButton.addEventListener("click", viewMakeCover)
-viewSavedButton.addEventListener("click", viewSavedCovers)
-homeButton.addEventListener("click", goHome)
 
+homeButton.addEventListener("click", goHome)
 makeUserCoverButton.addEventListener("click", makeUserCover) 
+
+saveCoverButton.addEventListener("click", saveCovers)
+
+viewSavedButton.addEventListener("click", viewSavedArray)
+viewSavedCovers.addEventListener("click", viewSavedCovers)
 
 //one that 1) makes new user generated cover on click and 2) returns the cover on the home page and 3) takes the user there.
 //  Create your event handlers and other functions here
@@ -59,20 +64,35 @@ function makeUserCover(event) {
   goHome()
 }
 
-  // title.innerText = titles.slice(-1)
-  // cover.src = covers.slice(-1)
-  // taglineOne.innerText = descriptors.slice(-2)
-  // taglineTwo.innerText = descriptors.slice(-1)
+  function saveCovers() {
+  savedCovers.push(currentCover)
+  return savedCovers
+  }
+
+//   function viewSavedArray() {
+// for (var i = 0; i < savedCovers.length; i++) {
+
+//  viewVarSavedCovers.innerHTML +=
+// `<section class="saved-covers-section"></section>
+// <section class="mini-cover">
+//     <img class="cover-image" src=${savedCovers[i].cover}>
+//     <h2 class="cover-title">${savedCovers[i].title}</h2>
+//     <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
+//     <img class="price-tag" src="./assets/price.png">
+//     <img class="overlay" src="./assets/overlay.png">`
+//   } 
+    
+
+//   }
 
 
-function generateRandom() {
+  function generateRandom() {
   var titleIndex = getRandomIndex(titles)
   var coverIndex = getRandomIndex(covers)
   var taglineOneIndex = getRandomIndex(descriptors)
   var taglineTwoIndex = getRandomIndex(descriptors)
   
   currentCover = new Cover (covers[coverIndex], titles[titleIndex], descriptors[taglineOneIndex], descriptors[taglineTwoIndex])
-
 
   title.innerText = titles[titleIndex]
   cover.src =covers[coverIndex]
@@ -93,6 +113,7 @@ function viewSavedCovers() {
   randomCoverButton.classList.add("hidden")
   saveCoverButton.classList.add("hidden")
   savedView.classList.remove("hidden")
+
 }
 
 function goHome() {
