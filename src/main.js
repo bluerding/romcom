@@ -7,7 +7,7 @@ var viewForm = document.querySelector('.form-view')
 var homeView = document.querySelector('.home-view')
 var savedView = document.querySelector('.saved-view')
 var savedCovers = [
-  new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
+  // new Cover()
 ];
 
 // Button Variables
@@ -23,6 +23,8 @@ var userDescript1 = document.querySelector(".user-desc1")
 var userDescript2 = document.querySelector(".user-desc2")
 var viewVarSavedCovers = document.querySelector(".saved-covers-section")
 
+
+
 // Event Listeners
 randomCoverButton.addEventListener("click", generateRandom)
 window.addEventListener("load", generateRandom)
@@ -31,6 +33,7 @@ homeButton.addEventListener("click", goHome)
 makeUserCoverButton.addEventListener("click", makeUserCover) 
 saveCoverButton.addEventListener("click", saveCovers)
 viewSavedButton.addEventListener("click", viewSavedArray)
+viewVarSavedCovers.addEventListener("click", deleteSavedCovers)
 
 // Event handlers and other functions
 function makeUserCover(event) {
@@ -62,15 +65,30 @@ function viewSavedArray() {
   viewVarSavedCovers.innerHTML = ''
     for (var i = 0; i < savedCovers.length; i++) {
     smallCover = `<section class="saved-covers-section"></section>
-    <section class="mini-cover">
+    <section class="mini-cover" data-cover-id=${savedCovers[i].id}> 
      <img class="cover-image" src=${savedCovers[i].cover}>
       <h2 class="cover-title">${savedCovers[i].title}</h2>
      <h3 class="tagline">A tale of <span class="tagline-1">${savedCovers[i].tagline1}</span> and <span class="tagline-2">${savedCovers[i].tagline2}</span></h3>
      <img class="price-tag" src="./assets/price.png">
-     <img class="overlay" src="./assets/overlay.png">`
-  
+     <img class="overlay" src="./assets/overlay.png">
+     </section> ` 
+ 
     viewVarSavedCovers.innerHTML += smallCover
     }
+  }
+//if the e.target class has a class of price tag
+
+// then we want to access the id of that cover
+// find that id in the saved Covers array
+// and remove it. 
+// then update Dom to reflect new saved Covers array
+
+  function deleteSavedCovers (e) {
+    if(e.target.classList.contains("price-tag")) {
+      console.log(e.target.parentNode.getAttribute("data-cover-id"))
+    }
+   
+
   }
 
 function generateRandom() {
